@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <style>
+        /* Add styles for the light theme */
+        .light-theme {
+          background-color: #fff;
+          color: #000;
+        }
+        /* Add styles for the dark theme */
+        .dark-theme {
+          background-color: #333;
+          color: #fff;
+        }
+    .chat-container {
+      padding-bottom : 2rem;
+      height: calc(100vh - 110px);
+      overflow-y: scroll;
+    }
+
+    .message-input {
+      position: fixed;
+      bottom: 0;
+      width: 78.5%;
+      background-color: #f7f7f7;
+      padding: 10px;
+      box-shadow: 0px -2px 10px #c3c3c3;
+    }
+
+    .message-input form {
+      display: flex;
+      justify-content: space-around;
+      
+      width: 90%;
+    }
+
+    .message-input input[type="text"] {
+      width: 70%;
+    }
+   
+    @media only screen and (max-width: 900px){
+      .message-input {
+        position: fixed;
+        bottom: 0;
+        width: 77%;
+        background-color: #f7f7f7;
+        padding: 15px;
+        box-shadow: 0px -2px 8px #c3c3c3;
+      }
+    }
+  </style>
+
+  
+</head>
+
+<body>
+
+
+  <div class="container-fluid h-100">
+    <div class="row h-100">
+      <div class="col-12 h-100 d-flex justify-content-center align-items-center">
+        <div class="card" style="width: 80%;">
+          <div class="card-header ">
+            <p class="room-name"> Room Name:<span> {{room}} </span> </p>
+            <a  href="/"> <button type="button" class="btn btn-outline-info">
+               Back To Home </button> </a>
+          </div>
+
+          <ul class="list-group list-group-flush chat-container" id="display">
+            {% comment %} <li class='list-group-item'>
+              <div class='d-flex w-100 justify-content-between'>
+                <h5 class='mb-1'>" + response.messages[key].user +"</h5>
+                <small class='text-muted'>"+ response.time_dict[key]+"</small> 
+              </div>
+              <p class='mb-1'>"+response.messages[key].value+"</p>
+            </li> {% endcomment %}
+        </ul>
+        <script>
+          $(document).ready(function(){
+            setInterval(function(){
+               
+              $.ajax({
+                type: 'GET',
+                url : "/getmessages/{{room}}/",
+                success:function(response){
+                  console.log(response)
+                  $("#display").empty();
+                  for(var key in response.messages){
+                    var temp = " <li class='list-group-item'><div class='d-flex w-100 justify-content-between'><p class='mb-1 user'>" + response.messages[key].user +"</p><small class='text-muted'>"+ response.time_dict[key]+"</small> </div><h5 class='mb-1 message'>"+response.messages[key].value+"</h5></li>";
+                    $("#display").append(temp);
+                  }
+                },
+                error:function(response){
+                  console.log('error Occured')
+                  // alert('An error Occured') 
+                }
+              });
+            },1000);
+          })
+        </script>
+      
+      
+        <div class="card-footer  message-input">
+            <form id="post-form">
+              {% csrf_token %}
+              
+              <input type="text" class="form-control" id="message" name="message" required   placeholder="Type your message here...">
+              <input type="hidden" name="room_id" id="room_id" value="{{room_details.id}}">
+              <input type="hidden" name="username" id="username" value="{{username}}">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+
+        
+          
+          <style>
+            .message-input {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 1rem;
+              }
+            
+              .message-input input {
+                width: 80%;
+                padding: 0.5rem;
+                border-radius: 20px;
+                margin-right: 1rem;
+              }
+            
+              .message-input button {
+                width: 20%;
+                padding: 0.5rem 1rem;
+                border-radius: 50px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                transition: all 0.3s ease-in-out;
+                cursor: pointer;
+              }
+            
+              .message-input button:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+              }
+            
+              .message-input button i {
+                animation: pulse 1s infinite;
+              }
+            
+              @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.1); }
+                100% { transform: scale(1); }
+              }
+              .message-input {
+                position: fixed;
+                bottom: 0;
+                width: 78.5%;
+                background-color: #f7f7f7;
+                padding: 15px;
+                box-shadow: 0px -2px 8px #c3c3c3;
+              }
+              .card-header{
+                font-size: 1.2rem;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                
+              }
+              span{
+                font-weight: 550;
+              }
+              a:link, a:visited, a:hover, a:active{
+                text-decoration: none;
+                color: #000;
+            }
+            a:hover{
+              color: #f8f8f8;
+            }
+            ::-moz-selection { /* Code for Firefox */
+              color: rgb(101, 191, 223);
+              background: rgb(0, 0, 0);
+            }
+            
+            ::selection {
+              color: rgb(56, 177, 222);
+              background: rgb(239, 234, 234);
+            }
+            
+              @media only screen and (max-width: 500px){
+                .message-input {
+                  position: fixed;
+                  bottom: 0;
+                  width: 75%;
+                  background-color: #f7f7f7;
+                  padding: 15px;
+                  box-shadow: 0px -2px 8px #c3c3c3;
+                }
+                .message{
+                  font-size: 1rem;
+                }
+                .user{
+                  font-size: 0.8rem;
+                }
+                .card-header{
+                  font-size: 1.2rem;
+                }
+                span{
+                  font-weight: 550;
+                }
+                .chat-container {
+                  padding-bottom : 4rem;
+                  height: calc(100vh - 110px);
+                  overflow-y: scroll;
+                }
+                .room-name{
+                  font-size: 1rem;
+                }
+              }
+
+
+          </style>
+          
+       
+      </div>
+    </div>
+  </div>
+</div>
+{% comment %} <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const toggleButton = document.querySelector("#toggle-theme");
+        const container = document.querySelector(".container-fluid");
+      
+        toggleButton.addEventListener("click", function() {
+          if (container.classList.contains("light-theme")) {
+            container.classList.remove("light-theme");
+            container.classList.add("dark-theme");
+          } else {
+            container.classList.remove("dark-theme");
+            container.classList.add("light-theme");
+          }
+        });
+      });
+     </script> {% endcomment %}
+
+
+</body>
+<script type="text/javascript">
+  $(document).on('submit',"#post-form",function(e){
+    e.preventDefault();
+    $.ajax({
+      type:'POST',
+      url:'/send',
+      data:{
+        username:$('#username').val(),
+        room_id:$('#room_id').val(),
+        
+        message:$('#message').val(),
+        csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
+      },
+      success: function(data){
+        console.log(data)
+        //alert(data)
+      }
+    });
+    
+    var messageBody = document.querySelector('#display');
+    messageBody.scrollTo(0, 100000); 
+    document.getElementById('message').value=''
+  });
+</script>
+</html>

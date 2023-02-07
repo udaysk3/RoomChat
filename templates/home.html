@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+    integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+    crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
+<div class="main">
+    <div class="container h-100">
+        <div class="d-flex h-100 align-items-center">
+          <div class="w-100 text-center">
+            <h1 class="display-4">Join Chat Room</h1>
+            <p class="lead">Enter the required information to join the chat room.</p>
+            <form id="pre-form" method="POST" action="checkview">
+                {% csrf_token %}
+              <div class="form-group">
+                <input type="text" class="form-control" name="room" id="room" placeholder="Enter Room Name" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" name="username" id="username" placeholder="Enter Your Name" required>
+              </div>
+              <button type="submit sub-btn" class="btn btn-primary">Join Room</button>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+<div class="footer small mr-3 p-0">
+  <p> Developed by <span> <a href="https://www.linkedin.com/in/uday-sk-3b40a11a7" target="blank" role="button">Udaysk</a> </span> 
+  CopyRight &copy; 2023 <br>
+ Frontend Credits : <span>ChatGPT </span> </p>
+</div>
+      <style>
+        ::-moz-selection { /* Code for Firefox */
+          color: rgb(56, 177, 222);
+          background: rgb(0, 0, 0);
+        }
+        
+        ::selection {
+          color: rgb(56, 177, 222);
+          background: rgb(239, 234, 234);
+        }
+        .main{
+        
+          position: absolute;
+          top:0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+          border: 3px solid rgb(12, 188, 211);
+          padding: 10px;
+        }
+        .form-group input {
+          width: 50%;
+          padding: 1rem;
+          font-size: 1.5rem;
+          border-radius: 20px;
+          text-align: center;
+          margin: 0.5rem auto;
+          display: block;
+        }
+      
+        .form-group button {
+          width: 25%;
+          padding: 1rem;
+          font-size: 1.5rem;
+          border-radius: 20px;
+          margin: 1rem auto;
+          display: block;
+        }
+        .footer{
+          position: absolute;
+          top:50;
+          bottom: 0;
+          left: 50;
+          right: 0;
+          margin: auto;
+        }
+        span{
+          font-weight: 550;
+          color: rgb(2, 2, 68);
+        }
+        a{
+          color: rgb(8, 95, 142);
+        }
+        a:link, a:visited, a:hover, a:active{
+          text-decoration: none;
+      }
+      a:hover{
+        font-size: 0.9rem;;
+        color: #050505;
+      }
+
+        @media only screen and (max-width: 600px) {
+          body {
+            background-color: rgb(143, 207, 228);
+          }
+          .form-group input {
+            width: 50%;
+            padding: 1rem;
+            font-size: 1rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 0.5rem auto;
+            display: block;
+          }
+          .display-4{
+            font-size: 2.5rem ;
+          }
+          .lead{
+            font-size: 1rem;
+          }
+          
+        }
+      </style>
+     
+  
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+</body>
+
+</html>
