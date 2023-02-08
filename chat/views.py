@@ -85,3 +85,4 @@ def send(request):
     time = str(now.strftime("%Y-%m-%d %H:%M:%S"))
     new_message = Message.objects.create(value=message,user=username,room=room_id,time=time)
     new_message.save()
+    return HttpResponse("Message sent")
