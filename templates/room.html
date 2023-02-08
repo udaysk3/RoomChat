@@ -89,7 +89,6 @@
         <script>
           $(document).ready(function(){
             setInterval(function(){
-               
               $.ajax({
                 type: 'GET',
                 url : "/getmessages/{{room}}/",
@@ -106,7 +105,7 @@
                   // alert('An error Occured') 
                 }
               });
-            },1000);
+            },2000);
           })
         </script>
       
@@ -269,7 +268,6 @@
       data:{
         username:$('#username').val(),
         room_id:$('#room_id').val(),
-        
         message:$('#message').val(),
         csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken]').val()
       },

@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-9)sg^aa5#x*il!wchg*#)e+hj(8gcw7*0-tv6i+x+2wsh+c$65
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['roomchat-production.up.railway.app']
+ALLOWED_HOSTS = ['roomchat-production.up.railway.app','127.0.0.1']
 
 CSRF_TRUSTED_ORIGINS = ['https://roomchat-production.up.railway.app']
 # Application definition

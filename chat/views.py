@@ -70,7 +70,6 @@ def getmessages(request,room):
             else : res_str = str(years)+" years ago"
         s[j] = res_str
         j+=1
-    print(room_details,messages)
     return JsonResponse(
         {
             "messages" :list(messages.values()),
