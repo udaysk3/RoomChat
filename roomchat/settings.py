@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['roomchat-production.up.railway.app']
 
-CSRF_TRUSTED_ORIGINS = ['https://roomchat-production.up.railway.app/']
+CSRF_TRUSTED_ORIGINS = ['https://roomchat-production.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
